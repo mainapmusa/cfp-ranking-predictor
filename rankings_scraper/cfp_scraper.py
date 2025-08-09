@@ -24,14 +24,14 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('cfp_scraper_v2.log'),
+        logging.FileHandler('cfp_scraper.log'),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
 
-class CFPRankingsScraperV2:
+class CFPRankingsScraper:
     """CFP Rankings Scraper that properly uses dropdown selectors."""
     
     def __init__(self, headless: bool = True, wait_time: int = 10):
@@ -313,7 +313,7 @@ class CFPRankingsScraperV2:
         """Export data to CSV."""
         if not filename:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"cfp_rankings_v2_{timestamp}.csv"
+            filename = f"cfp_rankings_{timestamp}.csv"
         
         df = pd.DataFrame(data)
         if not df.empty:
@@ -350,7 +350,7 @@ class CFPRankingsScraperV2:
 
 def main():
     """Main function to run the scraper."""
-    scraper = CFPRankingsScraperV2(headless=True)
+    scraper = CFPRankingsScraper(headless=True)
     
     try:
         # Scrape all available data
